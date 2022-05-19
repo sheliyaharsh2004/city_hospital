@@ -6,6 +6,7 @@ import Departments from "./container/Departments/Departments";
 import Doctor from "./container/Doctors/Doctor";
 import About from "./container/About/About";
 import Contact from "./container/Contact/Contact";
+import Login from "./container/Login/Login";
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
       <Switch>
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/departments"} component={Departments} />
-        <Route exact path={"/Doctors"} component={Doctor} />
+        <Route exact path={"/doctors"} component={Doctor} />
         <Route exact path={"/about"} component={About} />
         <Route exact path={"/contact"} component={Contact} />
+        <Route exact path={"/login"} component={Login} />
       </Switch>
       <Footer />
     </>
