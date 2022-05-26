@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, FormGroup, Input, Label } from 'reactstrap';
 import * as yup from 'yup';
 
 function Login(props) {
@@ -10,7 +10,7 @@ function Login(props) {
     const login = {
         name: yup.string().required(),
         email: yup.string().email(),
-    }   ;
+    };
 
     return (
         <main id="main">
@@ -24,12 +24,19 @@ function Login(props) {
                                 <h2>Signup</h2>
                         }
                     </div>
-                    <form action method="post" role="form" classname="php-email-form">
+                    <form classname="php-email-form">
                         <div classname="row flex-column align-items-center">
                             {
                                 Reset ?
                                     <div className="col-md-4 mt-3 form-group m-auto">
-                                        <input type="text" name="email" className="form-control" id="email" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                        <input type="text"
+                                            name="email"
+                                            className="form-control"
+                                            id="email"
+                                            placeholder="Your Name"
+                                            data-rule="minlen:4"
+                                            data-msg="Please enter at least 4 chars"
+                                        />
                                         <div className="validate" />
                                     </div>
                                     :
@@ -38,18 +45,39 @@ function Login(props) {
                             {
                                 userType === 'Signup' ?
                                     <div className="col-md-4 mt-3 form-group m-auto">
-                                        <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                        <input type="text"
+                                            name="name"
+                                            className="form-control"
+                                            id="name"
+                                            placeholder="Your Name"
+                                            data-rule="minlen:4"
+                                            data-msg="Please enter at least 4 chars"
+                                        />
                                         <div className="validate" />
                                     </div>
                                     :
                                     null
                             }
                             <div className="col-md-4 mt-3 form-group m-auto">
-                                <input type="text" name="email" className="form-control" id="email" placeholder="Your email" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <input type="text"
+                                    name="email"
+                                    className="form-control"
+                                    id="email"
+                                    placeholder="Your email"
+                                    data-rule="minlen:4"
+                                    data-msg="Please enter at least 4 chars"
+                                />
                                 <div className="validate" />
                             </div>
                             <div className="col-md-4 mt-3 form-group m-auto">
-                                <input type="password" name="password" className="form-control" id="password" placeholder="Your password" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                <input type="password"
+                                    name="password"
+                                    className="form-control"
+                                    id="password"
+                                    placeholder="Your password"
+                                    data-rule="minlen:4"
+                                    data-msg="Please enter at least 4 chars"
+                                />
                                 <div className="validate" />
                             </div>
                         </div>
