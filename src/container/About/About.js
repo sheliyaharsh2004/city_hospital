@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card } from 'reactstrap';
 
 function About(props) {
     return (
@@ -15,6 +16,9 @@ function About(props) {
                                 mauris. Aliquam erat volutpat. Aenean eget dui ac lectus rutrum aliquam pulvinar ut massa. Duis sagittis
                                 rutrum neque, quis tincidunt arcu pretium ac. Suspendisse sem </p>
                         </div>
+                        <Card
+                            
+                        />
                     </div>
                 </div>
             </section>
