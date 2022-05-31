@@ -29,23 +29,18 @@ function Header(props) {
                     <nav id="navbar" className="navbar order-last order-lg-0">
                         <ul>
                             <li>
-                                {/* <a className="nav-link scrollto active" href="index.html">Home</a> */}
                                 <NavLink className="nav-link scrollto active" exact to={"/"}>Home</NavLink>
                             </li>
                             <li>
-                                {/* <a className="nav-link scrollto" href="./pages/departments.html">Departments</a> */}
                                 <NavLink className="nav-link scrollto" exact to={"/departments"}>Departments</NavLink>
                             </li>
                             <li>
-                                {/* <a className="nav-link scrollto" href="./pages/doctors.html">Doctors</a> */}
                                 <NavLink className="nav-link scrollto" exact to={"/doctors"}>Doctor</NavLink>
                             </li>
                             <li>
-                                {/* <a className="nav-link scrollto " href="./pages/about.html">About</a> */}
                                 <NavLink className="nav-link scrollto" exact to={"/about"}>About</NavLink>
                             </li>
                             <li>
-                                {/* <a className="nav-link scrollto" href="./pages/contact.html">Contact</a> */}
                                 <NavLink className="nav-link scrollto" exact to={"/contact"}>Contact</NavLink>
                             </li>
                         </ul>
@@ -53,9 +48,6 @@ function Header(props) {
                     </nav>
                     <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
                         Appointment</a>
-                    {/* <a href="#" className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">Login/ Signup</span>
-                    </a> */}
                     <NavLink to={"/login"} className="appointment-btn scrollto">
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </NavLink>
