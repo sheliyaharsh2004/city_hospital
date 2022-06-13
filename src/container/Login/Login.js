@@ -61,7 +61,8 @@ function Login(props) {
     validationSchema: schema,
     onSubmit: (values) => {
       if (userType === "Login") {
-        console.log("Successfully Login");
+        // console.log("Successfully Login");
+        sessionStorage.setItem("user", "1");
       } else if (userType === "Signup") {
         console.log("Successfully Login");
       } else if (userType === "forgotPassword") {
