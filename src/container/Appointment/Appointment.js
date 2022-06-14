@@ -22,6 +22,9 @@ function Appointment(props) {
     },
     validationSchema:schema,
     onSubmit: (values, { resetForm }) => {
+        
+        const { name, email, phone, date, department } = values;
+
         alert(JSON.stringify(values, null, 2));
         resetForm();
     },
