@@ -1,8 +1,10 @@
 import React from 'react';
 import * as yup from "yup";
 import { Form, Formik, useFormik } from 'formik';
+import { Link, NavLink } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
 
-function Appointment(props) {
+function BookAppointment(props) {
 
     let schema = yup.object().shape({
         name: yup.string("Please enter your name").required("Please enter your name"),
@@ -40,6 +42,16 @@ function Appointment(props) {
                             blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
                             Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                     </div>
+                    <div className='appoinmentnav'>
+                        <div className='row text-center mb-3'>
+                            <div className='col-6'>
+                                <NavLink href="#" underline="hover" to={"/bookappoinment"}>Book Appoinment</NavLink>
+                            </div>
+                            <div className='col-6'>
+                                <NavLink to={"/listappoinment"}>List Appoinment</NavLink>
+                            </div>
+                        </div>
+                    </div>
                     <Formik value={formik}>
                         <Form key={formik} onSubmit={formik.handleSubmit} action method="post" role="form" className="php-email-form">
                             <div className="row">
@@ -55,7 +67,7 @@ function Appointment(props) {
                                         onChange={formik.handleChange}
                                     />
                                     {
-                                        formik.errors.name ? <p>{formik.errors.name}</p>
+                                        formik.errors.name ? <p className='error'>{formik.errors.name}</p>
                                         :
                                         null
                                     }
@@ -72,7 +84,7 @@ function Appointment(props) {
                                         onChange={formik.handleChange}
                                     />
                                     {
-                                        formik.errors.email ? <p>{formik.errors.email}</p>
+                                        formik.errors.email ? <p className='error'>{formik.errors.email}</p>
                                         :
                                         null
                                     }
@@ -84,12 +96,13 @@ function Appointment(props) {
                                         name="phone" 
                                         id="phone" 
                                         placeholder="Your Phone" 
+                                        maxLength={10}
                                         data-rule="minlen:4" 
                                         data-msg="Please enter at least 4 chars" 
                                         onChange={formik.handleChange}
                                     />
                                     {
-                                        formik.errors.phone ? <p>{formik.errors.phone}</p>
+                                        formik.errors.phone ? <p className='error'>{formik.errors.phone}</p>
                                         :
                                         null
                                     }
@@ -102,13 +115,16 @@ function Appointment(props) {
                                         name="date" 
                                         className="form-control datepicker" 
                                         id="date" 
-                                        placeholder="Appointment Date" 
+                                        label="Date desktop"
+                                        placeholder="MM/dd/yyyy" 
+                                        value={value}
+                                        renderInput={(params) => <TextField {...params} />}
                                         data-rule="minlen:4" 
                                         data-msg="Please enter at least 4 chars" 
                                         onChange={formik.handleChange}
                                     />
                                     {
-                                        formik.errors.date ? <p>{formik.errors.date}</p>
+                                        formik.errors.date ? <p className='error'>{formik.errors.date}</p>
                                         :
                                         null
                                     }
@@ -121,7 +137,7 @@ function Appointment(props) {
                                         <option value="Department 3">Department 3</option>
                                     </select>
                                     {
-                                        formik.errors.department ? <p>{formik.errors.department}</p>
+                                        formik.errors.department ? <p className='error'>{formik.errors.department}</p>
                                         :
                                         null
                                     }
@@ -144,4 +160,4 @@ function Appointment(props) {
     );
 }
 
-export default Appointment;
+export default BookAppointment;

@@ -11,10 +11,10 @@ function Header(props) {
                         <i className="bi bi-phone" /> <a href="tel:+91 9988776655">+91 9988776655</a>
                     </div>
                     <div className="d-none d-lg-flex social-links align-items-center">
-                        <a href="https://twitter.com/i/flow/login" className="twitter"><i className="bi bi-twitter" /></a>
-                        <a href="https://www.facebook.com/login/" className="facebook"><i className="bi bi-facebook" /></a>
-                        <a href="https://www.instagram.com/accounts/login/" className="instagram"><i className="bi bi-instagram" /></a>
-                        <a href="https://www.linkedin.com/login" className="linkedin"><i className="bi bi-linkedin" /></a>
+                        <a href="https://twitter.com/" className="twitter"><i className="bi bi-twitter" /></a>
+                        <a href="https://www.facebook.com/" className="facebook"><i className="bi bi-facebook" /></a>
+                        <a href="https://www.instagram.com/" className="instagram"><i className="bi bi-instagram" /></a>
+                        <a href="https://www.linkedin.com/" className="linkedin"><i className="bi bi-linkedin" /></a>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@ function Header(props) {
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
-                    <NavLink to={"/appointment"} className="appointment-btn scrollto">
+                    <NavLink to={"/bookappointment"} className="appointment-btn scrollto">
                         <span className="d-none d-md-inline">Make Appointment</span>
                     </NavLink>
                     <NavLink to={"/login"} className="appointment-btn scrollto">
