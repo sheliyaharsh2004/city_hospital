@@ -1,8 +1,8 @@
 import React from 'react';
 import * as yup from "yup";
 import { Form, Formik, useFormik } from 'formik';
-import { Link, NavLink } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
+import { NavLink } from 'react-router-dom';
+import InputBox from '../../components/InputBox/InputBox';
 
 function BookAppointment(props) {
 
@@ -12,6 +12,7 @@ function BookAppointment(props) {
         phone: yup.number().required("Please enter your number"),
         date: yup.string().required("Please enter your date"),
         department: yup.string().required("Please enter your date"),
+        message: yup.string().required("Please enter your message"),
     });
 
     const formik = useFormik({
@@ -21,16 +22,27 @@ function BookAppointment(props) {
         phone: "",
         date: "",
         department: "",
+        message: "",
     },
     validationSchema:schema,
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: values => {
         
-        const { name, email, phone, date, department } = values;
+        const { 
+            name, 
+            email, 
+            phone, 
+            date, 
+            department, 
+            message 
+        } = values;
 
         alert(JSON.stringify(values, null, 2));
-        resetForm();
+        // resetForm();
     },
     });
+
+    const {handleSubmit , handleChange , errors} = formik;
+    // console.log(errors);
 
     return (
         <main id="main">
@@ -53,99 +65,103 @@ function BookAppointment(props) {
                         </div>
                     </div>
                     <Formik value={formik}>
-                        <Form key={formik} onSubmit={formik.handleSubmit} action method="post" role="form" className="php-email-form">
+                        <Form key={formik} onSubmit={handleSubmit} action method="post" role="form" className="php-email-form">
                             <div className="row">
                                 <div className="col-md-4 form-group">
-                                    <input
+                                    <InputBox
                                         type="text" 
                                         name="name" 
                                         className="form-control" 
                                         id="name" 
                                         placeholder="Your Name" 
-                                        data-rule="minlen:4" 
-                                        data-msg="Please enter at least 4 chars"
-                                        onChange={formik.handleChange}
+                                        error={Boolean(errors.name)}
+                                        errormessage={errors.name}
+                                        onChange={handleChange}
                                     />
-                                    {
+                                    {/* {
                                         formik.errors.name ? <p className='error'>{formik.errors.name}</p>
                                         :
                                         null
-                                    }
+                                    } */}
                                 </div>
                                 <div className="col-md-4 form-group mt-3 mt-md-0">
-                                    <input 
+                                    <InputBox 
                                         type="email" 
                                         className="form-control" 
                                         name="email"
                                         id="email" 
                                         placeholder="Your Email" 
                                         data-rule="email" 
-                                        data-msg="Please enter a valid email" 
-                                        onChange={formik.handleChange}
+                                        error={Boolean(errors.email)}
+                                        errormessage={errors.email}
+                                        onChange={handleChange}
                                     />
-                                    {
+                                    {/* {
                                         formik.errors.email ? <p className='error'>{formik.errors.email}</p>
                                         :
                                         null
-                                    }
+                                    } */}
                                 </div>
                                 <div className="col-md-4 form-group mt-3 mt-md-0">
-                                    <input 
+                                    <InputBox 
                                         type="tel" 
                                         className="form-control" 
                                         name="phone" 
                                         id="phone" 
                                         placeholder="Your Phone" 
                                         maxLength={10}
-                                        data-rule="minlen:4" 
-                                        data-msg="Please enter at least 4 chars" 
-                                        onChange={formik.handleChange}
+                                        error={Boolean(errors.phone)}
+                                        errormessage={errors.phone}
+                                        onChange={handleChange}
                                     />
-                                    {
+                                    {/* {
                                         formik.errors.phone ? <p className='error'>{formik.errors.phone}</p>
                                         :
                                         null
-                                    }
+                                    } */}
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-4 form-group mt-3">
-                                    <input 
-                                        type="datetime" 
+                                    <InputBox 
+                                        type="date" 
                                         name="date" 
                                         className="form-control datepicker" 
                                         id="date" 
                                         label="Date desktop"
                                         placeholder="MM/dd/yyyy" 
-                                        value={value}
-                                        renderInput={(params) => <TextField {...params} />}
-                                        data-rule="minlen:4" 
-                                        data-msg="Please enter at least 4 chars" 
-                                        onChange={formik.handleChange}
+                                        error={Boolean(errors.date)}
+                                        errormessage={errors.date}
+                                        onChange={handleChange}
                                     />
-                                    {
+                                    {/* {
                                         formik.errors.date ? <p className='error'>{formik.errors.date}</p>
                                         :
                                         null
-                                    }
+                                    } */}
                                 </div>
                                 <div className="col-md-4 form-group mt-3">
-                                    <select name="department" id="department" className="form-select" onChange={formik.handleChange}>
+                                    <InputBox type="select" name="department" id="department" className="form-select" onChange={handleChange} error={Boolean(errors.department)} errormessage={errors.department}>
                                         <option value>Select Department</option>
                                         <option value="Department 1">Department 1</option>
                                         <option value="Department 2">Department 2</option>
                                         <option value="Department 3">Department 3</option>
-                                    </select>
-                                    {
+                                    </InputBox>
+                                    {/* {
                                         formik.errors.department ? <p className='error'>{formik.errors.department}</p>
                                         :
                                         null
-                                    }
+                                    } */}
                                 </div>
                             </div>
                             <div className="form-group mt-3">
-                                <textarea className="form-control" name="message" rows={5} placeholder="Message (Optional)" defaultValue={""} />
+                                <InputBox type="textarea" className="form-control" name="message" rows={5} placeholder="Message (Optional)" defaultValue={""} onChange={handleChange} error={Boolean(errors.message)} errormessage={errors.message} />
                             </div>
+                            {/* {
+                                formik.errors.message ? <p className='error'>{formik.errors.message}</p>
+                                :
+                                null
+                            } */}
                             <div className="mb-3">
                                 <div className="loading">Loading</div>
                                 <div className="error-message" />
