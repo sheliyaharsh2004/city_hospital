@@ -25,7 +25,7 @@ function BookAppointment(props) {
         message: "",
     },
     validationSchema:schema,
-    onSubmit: values => {
+    onSubmit: (values, {resetForm }) => {
         
         const { 
             name, 
@@ -36,8 +36,8 @@ function BookAppointment(props) {
             message 
         } = values;
 
-        alert(JSON.stringify(values, null, 2));
-        // resetForm();
+        console.log(JSON.stringify(values, null, 2));
+        resetForm ();
     },
     });
 
