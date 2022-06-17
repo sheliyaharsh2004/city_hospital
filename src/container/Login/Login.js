@@ -96,9 +96,8 @@ function Login(props) {
                       placeholder="Enter email"
                     />
                     {
-                      formik.errors.email ? <p>{formik.errors.email}</p> : null
+                      formik.errors.email ? <p className='error'>{formik.errors.email}</p> : null
                     }
-                    <div className="validate" />
                   </div>
                 ) : null}
                 {userType === "Signup" ? (
@@ -111,9 +110,8 @@ function Login(props) {
                       placeholder="Your Name"
                       onChange={formik.handleChange}
                     />
-                    <div className="validate" />
                     {
-                      formik.errors.name ? <p>{formik.errors.name}</p> : null
+                      formik.errors.name ? <p className='error'>{formik.errors.name}</p> : null
                     }
                   </div>
                 ) : null}
@@ -130,9 +128,8 @@ function Login(props) {
                         data-msg="Please enter a valid email"
                         onChange={formik.handleChange}
                       />
-                      {formik.errors.email ? (
-                        <p>{formik.errors.email}</p>
-                      ) : null}
+                      {formik.errors.email ? <p className='error'>{formik.errors.email}</p>
+                       : null}
                       <div className="validate" />
                     </div>
                     <div className="col-md-4 form-group mt-3 mt-md-0">
@@ -147,9 +144,8 @@ function Login(props) {
                         onChange={formik.handleChange}
                       />
                       {formik.errors.password ? (
-                        <p>{formik.errors.password}</p>
+                        <p className='error'>{formik.errors.password}</p>
                       ) : null}
-                      <div className="validate" />
                     </div>
                   </>
                 ) : null}

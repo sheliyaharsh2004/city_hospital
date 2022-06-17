@@ -35,13 +35,39 @@ function BookAppointment(props) {
             department, 
             message 
         } = values;
+        
+        const Hdata = {
+            id: Math.floor(Math.random() * 1000),
+            name, 
+            email, 
+            phone, 
+            date, 
+            department, 
+            message 
+        }
+        console.log(Hdata);
+
+        
+       let Bappoi = JSON.parse(localStorage.getItem("bookappointment"));
+
+       if (Bappoi == null) {
+        localStorage.setItem("bookappointment" , JSON.stringify([Hdata]));       
+       }else{
+        Bappoi.push(Hdata);
+        localStorage.setItem("bookappointment" , JSON.stringify(Bappoi));
+       }
+
+
+
+
+
 
         console.log(JSON.stringify(values, null, 2));
         resetForm ();
     },
     });
 
-    const {handleSubmit , handleChange , errors} = formik;
+    const {handleSubmit, handleChange, values, errors} = formik;
     // console.log(errors);
 
     return (
@@ -57,10 +83,10 @@ function BookAppointment(props) {
                     <div className='appoinmentnav'>
                         <div className='row text-center mb-3'>
                             <div className='col-6'>
-                                <NavLink href="#" underline="hover" to={"/bookappoinment"}>Book Appoinment</NavLink>
+                                <NavLink href="#" underline="hover" to={"/bookappointment"}>Book Appoinment</NavLink>
                             </div>
                             <div className='col-6'>
-                                <NavLink to={"/listappoinment"}>List Appoinment</NavLink>
+                                <NavLink to={"/listappointment"}>List Appoinment</NavLink>
                             </div>
                         </div>
                     </div>
@@ -77,6 +103,7 @@ function BookAppointment(props) {
                                         error={Boolean(errors.name)}
                                         errormessage={errors.name}
                                         onChange={handleChange}
+                                        value={values.name}
                                     />
                                     {/* {
                                         formik.errors.name ? <p className='error'>{formik.errors.name}</p>
@@ -95,6 +122,7 @@ function BookAppointment(props) {
                                         error={Boolean(errors.email)}
                                         errormessage={errors.email}
                                         onChange={handleChange}
+                                        value={values.email}
                                     />
                                     {/* {
                                         formik.errors.email ? <p className='error'>{formik.errors.email}</p>
@@ -113,6 +141,7 @@ function BookAppointment(props) {
                                         error={Boolean(errors.phone)}
                                         errormessage={errors.phone}
                                         onChange={handleChange}
+                                        value={values.phone}
                                     />
                                     {/* {
                                         formik.errors.phone ? <p className='error'>{formik.errors.phone}</p>
@@ -129,10 +158,11 @@ function BookAppointment(props) {
                                         className="form-control datepicker" 
                                         id="date" 
                                         label="Date desktop"
-                                        placeholder="MM/dd/yyyy" 
+                                        placeholder="date" 
                                         error={Boolean(errors.date)}
                                         errormessage={errors.date}
                                         onChange={handleChange}
+                                        value={values.date}
                                     />
                                     {/* {
                                         formik.errors.date ? <p className='error'>{formik.errors.date}</p>
@@ -141,7 +171,7 @@ function BookAppointment(props) {
                                     } */}
                                 </div>
                                 <div className="col-md-4 form-group mt-3">
-                                    <InputBox type="select" name="department" id="department" className="form-select" onChange={handleChange} error={Boolean(errors.department)} errormessage={errors.department}>
+                                    <InputBox type="select" name="department" id="department" className="form-select" onChange={handleChange} error={Boolean(errors.department)} errormessage={errors.department} value={values.department}>
                                         <option value>Select Department</option>
                                         <option value="Department 1">Department 1</option>
                                         <option value="Department 2">Department 2</option>
@@ -155,7 +185,7 @@ function BookAppointment(props) {
                                 </div>
                             </div>
                             <div className="form-group mt-3">
-                                <InputBox type="textarea" className="form-control" name="message" rows={5} placeholder="Message (Optional)" defaultValue={""} onChange={handleChange} error={Boolean(errors.message)} errormessage={errors.message} />
+                                <InputBox type="textarea" className="form-control" name="message" rows={5} placeholder="Message (Optional)" defaultValue={""} onChange={handleChange} error={Boolean(errors.message)} errormessage={errors.message} value={values.message} />
                             </div>
                             {/* {
                                 formik.errors.message ? <p className='error'>{formik.errors.message}</p>

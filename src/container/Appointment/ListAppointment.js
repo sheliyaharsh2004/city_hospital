@@ -43,10 +43,10 @@ function ListAppointment(props) {
                     <div className='appoinmentnav'>
                         <div className='row text-center mb-3'>
                             <div className='col-6'>
-                                <NavLink to={"/bookappoinment"}>Book Appoinment</NavLink>
+                                <NavLink to={"/bookappointment"}>Book Appoinment</NavLink>
                             </div>
                             <div className='col-6'>
-                                <NavLink to={"/listappoinment"}>List Appoinment</NavLink>
+                                <NavLink to={"/listappointment"}>List Appoinment</NavLink>
                             </div>
                         </div>
                     </div>
