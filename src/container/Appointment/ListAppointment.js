@@ -1,34 +1,22 @@
-import React from 'react';
-import * as yup from "yup";
-import { Form, Formik, useFormik } from 'formik';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 function ListAppointment(props) {
-    let schema = yup.object().shape({
-        name: yup.string("Please enter your name").required("Please enter your name"),
-        email: yup.string().email("Please enter Valid email"). required("Please enter your email"),
-        phone: yup.number().required("Please enter your number"),
-        date: yup.string().required("Please enter your date"),
-        department: yup.string().required("Please enter your date"),
-    });
+   
+    const [data , setData]= useState([]);
 
-    const formik = useFormik({
-    initialValues: {
-        name: "",
-        email: "",
-        phone: "",
-        date: "",
-        department: "",
-    },
-    validationSchema:schema,
-    onSubmit: (values, { resetForm }) => {
-        
-        const { name, email, phone, date, department } = values;
-
-        alert(JSON.stringify(values, null, 2));
-        resetForm();
-    },
-    });
+    const showdata = () => {
+        let listData = JSON.parse(localStorage.getItem("bookappointment"));
+     
+        setData(listData);
+    }
+     
+    useEffect(
+        () =>{
+            showdata()
+        },
+    []);
 
     return (
         <main id="main">
@@ -49,6 +37,17 @@ function ListAppointment(props) {
                                 <NavLink to={"/listappointment"}>List Appoinment</NavLink>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        {
+                            data.map((d,i) =>{
+                                return(
+                                    <>
+                                        <h4>{d.name}</h4>
+                                    </>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </section>

@@ -1,10 +1,12 @@
 import React from 'react';
 import * as yup from "yup";
 import { Form, Formik, useFormik } from 'formik';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import InputBox from '../../components/InputBox/InputBox';
 
 function BookAppointment(props) {
+
+    const history = useHistory();
 
     let schema = yup.object().shape({
         name: yup.string("Please enter your name").required("Please enter your name"),
@@ -47,7 +49,6 @@ function BookAppointment(props) {
         }
         console.log(Hdata);
 
-        
        let Bappoi = JSON.parse(localStorage.getItem("bookappointment"));
 
        if (Bappoi == null) {
@@ -57,18 +58,13 @@ function BookAppointment(props) {
         localStorage.setItem("bookappointment" , JSON.stringify(Bappoi));
        }
 
-
-
-
-
-
+        history.push("/listappointment")
         console.log(JSON.stringify(values, null, 2));
         resetForm ();
     },
     });
 
-    const {handleSubmit, handleChange, values, errors} = formik;
-    // console.log(errors);
+    const {handleSubmit, handleChange, handleBlur,  values, errors, touched} = formik;
 
     return (
         <main id="main">
@@ -100,10 +96,11 @@ function BookAppointment(props) {
                                         className="form-control" 
                                         id="name" 
                                         placeholder="Your Name" 
-                                        error={Boolean(errors.name)}
+                                        error={Boolean(errors.name && touched.name)}
                                         errormessage={errors.name}
                                         onChange={handleChange}
-                                        value={values.name}
+                                        value={values.name} 
+                                        onBlur={handleBlur}
                                     />
                                     {/* {
                                         formik.errors.name ? <p className='error'>{formik.errors.name}</p>
@@ -119,10 +116,11 @@ function BookAppointment(props) {
                                         id="email" 
                                         placeholder="Your Email" 
                                         data-rule="email" 
-                                        error={Boolean(errors.email)}
+                                        error={Boolean(errors.email && touched.email)}
                                         errormessage={errors.email}
                                         onChange={handleChange}
                                         value={values.email}
+                                        onBlur={handleBlur}
                                     />
                                     {/* {
                                         formik.errors.email ? <p className='error'>{formik.errors.email}</p>
@@ -138,10 +136,11 @@ function BookAppointment(props) {
                                         id="phone" 
                                         placeholder="Your Phone" 
                                         maxLength={10}
-                                        error={Boolean(errors.phone)}
+                                        error={Boolean(errors.phone && touched.phone)}
                                         errormessage={errors.phone}
                                         onChange={handleChange}
                                         value={values.phone}
+                                        onBlur={handleBlur}
                                     />
                                     {/* {
                                         formik.errors.phone ? <p className='error'>{formik.errors.phone}</p>
@@ -159,10 +158,11 @@ function BookAppointment(props) {
                                         id="date" 
                                         label="Date desktop"
                                         placeholder="date" 
-                                        error={Boolean(errors.date)}
+                                        error={Boolean(errors.date && touched.date)}
                                         errormessage={errors.date}
                                         onChange={handleChange}
                                         value={values.date}
+                                        onBlur={handleBlur}
                                     />
                                     {/* {
                                         formik.errors.date ? <p className='error'>{formik.errors.date}</p>
@@ -171,7 +171,16 @@ function BookAppointment(props) {
                                     } */}
                                 </div>
                                 <div className="col-md-4 form-group mt-3">
-                                    <InputBox type="select" name="department" id="department" className="form-select" onChange={handleChange} error={Boolean(errors.department)} errormessage={errors.department} value={values.department}>
+                                    <InputBox
+                                        type="select" 
+                                        name="department" 
+                                        id="department" 
+                                        className="form-select" 
+                                        onChange={handleChange} 
+                                        error={Boolean(errors.department && touched.department)} 
+                                        errormessage={errors.department} 
+                                        value={values.department}
+                                        onBlur={handleBlur}>
                                         <option value>Select Department</option>
                                         <option value="Department 1">Department 1</option>
                                         <option value="Department 2">Department 2</option>
@@ -185,7 +194,19 @@ function BookAppointment(props) {
                                 </div>
                             </div>
                             <div className="form-group mt-3">
-                                <InputBox type="textarea" className="form-control" name="message" rows={5} placeholder="Message (Optional)" defaultValue={""} onChange={handleChange} error={Boolean(errors.message)} errormessage={errors.message} value={values.message} />
+                                <InputBox 
+                                    type="textarea" 
+                                    className="form-control" 
+                                    name="message" 
+                                    rows={5} 
+                                    placeholder="Message (Optional)" 
+                                    defaultValue={""} 
+                                    onChange={handleChange} 
+                                    error={Boolean(errors.message && touched.message)} 
+                                    errormessage={errors.message} 
+                                    value={values.message} 
+                                    onBlur={handleBlur}
+                                />
                             </div>
                             {/* {
                                 formik.errors.message ? <p className='error'>{formik.errors.message}</p>
