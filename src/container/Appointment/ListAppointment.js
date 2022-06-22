@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import TextField from "@mui/material/TextField";
 import { DataGrid } from "@mui/x-data-grid";
 import IconButton from "@mui/material/IconButton";
@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 function ListAppointment(props) {
    
+    const history = useHistory();
     const [data , setData]= useState([]);
 
     const showdata = () => {
@@ -17,11 +18,18 @@ function ListAppointment(props) {
         setData(listData);
     }
      
-    const handleClickDopen = (id) => {
-       
+    const handleDelete = (id) => {
+        let dData = JSON.parse(localStorage.getItem("bookappointment"));
+
+        let filterdata = dData.filter((d, i) => d.id !== id);
+    
+        localStorage.setItem("bookappointment" , JSON.stringify(filterdata))
+    
+        showdata();
     };
 
-    const handleClickEditOpen = (params) => {
+    const handleEdit = (id) => {
+        history.push("/bookappointment", {"id" : id})
     };
 
     useEffect(
@@ -31,32 +39,43 @@ function ListAppointment(props) {
     []);
 
     const columns = [
-        { field: "name", headerName: "Name", width: 130 },
-        { field: "email", headerName: "Email", width: 130 },
-        { field: "phone", headerName: "Phone", width: 130 },
-        { field: "date", headerName: "Date", width: 130 },
-        { field: "department", headerName: "Department", width: 130 },
+        { field: "id", headerName: "ID", width: 60 },
+        { field: "name", headerName: "Name", width: 80 },
+        { field: "email", headerName: "Email", width: 170 },
+        { field: "phone", headerName: "Phone", width: 110 },
+        { field: "date", headerName: "Date", width: 100 },
+        { field: "department", headerName: "Department", width: 120 },
         { field: "message", headerName: "Message", width: 130 },
         {
-          field: "action",
-          headerName: "Action",
-          width: 100,
-          renderCell: (params) => {
-            return (
-              <>
-                <IconButton
-                  className="border-primary"
-                  onClick={() => handleClickDopen(params.id)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-                <IconButton onClick={() => handleClickEditOpen(params)}>
-                  <EditIcon />
-                </IconButton>
-              </>
-            );
+            field: "delete",
+            headerName: "Delete",
+            width: 70,
+            renderCell: (params) => {
+              return (
+                <>
+                  <IconButton
+                    className="border-primary"
+                    onClick={() => handleDelete(params.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </>
+              );
+            },
           },
-        },
+          {
+            field: "Edit",
+            headerName: "Edit",
+            width: 70,
+            renderCell: (params) => {
+              return (
+                <>
+                  <IconButton onClick={() => handleEdit(params.id)}>
+                    <EditIcon />
+                  </IconButton>
+                </>
+              );
+            },
+          },  
     ];
 
     return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as yup from "yup";
 import { Form, Formik, useFormik } from 'formik';
 import { NavLink, useHistory } from 'react-router-dom';
@@ -6,6 +6,7 @@ import InputBox from '../../components/InputBox/InputBox';
 
 function BookAppointment(props) {
 
+    const [udate , setUdate] = useState(false);
     const history = useHistory();
 
     let schema = yup.object().shape({
@@ -28,7 +29,6 @@ function BookAppointment(props) {
     },
     validationSchema:schema,
     onSubmit: (values, {resetForm }) => {
-        
         const { 
             name, 
             email, 
@@ -63,6 +63,20 @@ function BookAppointment(props) {
         resetForm ();
     },
     });
+
+    useEffect(
+        () =>{
+            let dDate = JSON.parse(localStorage.getItem("bookappointment"));
+
+            if (dDate !== null && props.location.state) {
+
+                let filterdata = dDate.filter((d) => d.id === props.location.state.id);
+
+                formik.setValues(filterdata[0])
+                setUdate(true);
+            }
+        },
+    []);
 
     const {handleSubmit, handleChange, handleBlur,  values, errors, touched} = formik;
 
@@ -218,7 +232,12 @@ function BookAppointment(props) {
                                 <div className="error-message" />
                                 <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                             </div>
-                            <div className="text-center"><button type="submit">Make an Appointment</button></div>
+                            {
+                                udate ?
+                                <div className="text-center"><button type="submit">update an Appointment</button></div>
+                                :
+                                <div className="text-center"><button type="submit">Make an Appointment</button></div>
+                            }
                         </Form>
                     </Formik>
                 </div>
