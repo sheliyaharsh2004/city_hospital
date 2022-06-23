@@ -7,7 +7,29 @@ import InputBox from '../../components/InputBox/InputBox';
 function BookAppointment(props) {
 
     const [udate , setUdate] = useState(false);
+
     const history = useHistory();
+
+    const handleUpdate = (udata) =>{
+          
+        let Update = JSON.parse(localStorage.getItem("bookappointment"));
+
+        console.log(Update);
+      
+        let fdata = Update.map((i) =>{
+            if (i.id === udata.id) {
+              return udata
+            }else{
+              return i
+            }
+        })
+
+        localStorage.setItem("bookappointment", JSON.stringify(fdata))
+        history.push("/listappointment");
+        formik.resetForm();
+        setUdate(false);
+        console.log(fdata);
+    }
 
     let schema = yup.object().shape({
         name: yup.string("Please enter your name").required("Please enter your name"),
@@ -19,49 +41,55 @@ function BookAppointment(props) {
     });
 
     const formik = useFormik({
-    initialValues: {
-        name: "",
-        email: "",
-        phone: "",
-        date: "",
-        department: "",
-        message: "",
-    },
-    validationSchema:schema,
-    onSubmit: (values, {resetForm }) => {
-        const { 
-            name, 
-            email, 
-            phone, 
-            date, 
-            department, 
-            message 
-        } = values;
+        initialValues: {
+            name: "",
+            email: "",
+            phone: "",
+            date: "",
+            department: "",
+            message: "",
+        },
+        validationSchema:schema,
+        onSubmit: (values, {resetForm }) => {
+            console.log(values);   
+
+            if(udate){
+                handleUpdate(values)
+            }else{
+                const { 
+                    name, 
+                    email, 
+                    phone, 
+                    date, 
+                    department, 
+                    message 
+                } = values;
         
-        const Hdata = {
-            id: Math.floor(Math.random() * 1000),
-            name, 
-            email, 
-            phone, 
-            date, 
-            department, 
-            message 
+                const Hdata = {
+                    id: Math.floor(Math.random() * 1000),
+                    name, 
+                    email, 
+                    phone, 
+                    date, 
+                    department, 
+                    message 
+                }
+                console.log(Hdata);
+
+                let data = JSON.parse(localStorage.getItem("bookappointment"));
+
+                if (data == null) {
+                    localStorage.setItem("bookappointment" , JSON.stringify([Hdata]));       
+                }else{
+                    data.push(Hdata);
+                    localStorage.setItem("bookappointment" , JSON.stringify(data));
+                }
+
+                history.push("/listappointment")
+                // console.log(JSON.stringify(values, null, 2));
+                resetForm ();
+            }
         }
-        console.log(Hdata);
-
-       let Bappoi = JSON.parse(localStorage.getItem("bookappointment"));
-
-       if (Bappoi == null) {
-        localStorage.setItem("bookappointment" , JSON.stringify([Hdata]));       
-       }else{
-        Bappoi.push(Hdata);
-        localStorage.setItem("bookappointment" , JSON.stringify(Bappoi));
-       }
-
-        history.push("/listappointment")
-        console.log(JSON.stringify(values, null, 2));
-        resetForm ();
-    },
     });
 
     useEffect(

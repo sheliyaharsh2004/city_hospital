@@ -14,8 +14,11 @@ function ListAppointment(props) {
 
     const showdata = () => {
         let listData = JSON.parse(localStorage.getItem("bookappointment"));
+        
      
-        setData(listData);
+        if (listData !== null) {
+          setData(listData);
+        }
     }
      
     const handleDelete = (id) => {
@@ -40,7 +43,7 @@ function ListAppointment(props) {
 
     const columns = [
         { field: "id", headerName: "ID", width: 60 },
-        { field: "name", headerName: "Name", width: 80 },
+        { field: "name", headerName: "Name", width: 120 },
         { field: "email", headerName: "Email", width: 170 },
         { field: "phone", headerName: "Phone", width: 110 },
         { field: "date", headerName: "Date", width: 100 },
