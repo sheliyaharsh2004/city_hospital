@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import { Form, Formik, useFormik } from "formik";
+import InputBox from "../../components/InputBox/InputBox";
 
 function Contact(props) {
     const [date, setDate] = useState([]);
@@ -79,7 +80,7 @@ function Contact(props) {
                     <Form key={formik} onSubmit={formik.handleSubmit}>
                         <div className="row">
                           <div className="col-md-6 form-group">
-                            <input
+                            <InputBox
                               type="text"
                               name="name"
                               className="form-control"
@@ -94,7 +95,7 @@ function Contact(props) {
                             ) : null}
                           </div>
                           <div className="col-md-6 form-group mt-3 mt-md-0">
-                            <input
+                            <InputBox
                               type="email"
                               className="form-control"
                               name="email"
@@ -110,7 +111,7 @@ function Contact(props) {
                           </div>
                         </div>
                         <div className="form-group mt-3">
-                          <input
+                          <InputBox
                             type="text"
                             className="form-control"
                             name="subject"
@@ -125,7 +126,7 @@ function Contact(props) {
                           ) : null}
                         </div>
                         <div className="form-group mt-3">
-                          <textarea
+                          <InputBox
                             className="form-control"
                             name="message"
                             rows={5}
