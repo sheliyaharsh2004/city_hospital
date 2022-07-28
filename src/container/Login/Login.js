@@ -56,6 +56,7 @@ function Login(props) {
     };
   }
 
+
   const formik = useFormik({
     initialValues: initialVal,
     validationSchema: schema,
@@ -63,6 +64,7 @@ function Login(props) {
       if (userType === "Login") {
         // console.log("Successfully Login");
         sessionStorage.setItem("user", "1");
+        dispatch(LoginUser(v));
       } else if (userType === "Signup") {
         console.log("Successfully Login");
       } else if (userType === "forgotPassword") {
