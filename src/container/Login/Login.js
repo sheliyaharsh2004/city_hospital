@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Button, FormGroup, Input, Label } from "reactstrap";
 import * as yup from "yup";
 import { Form, Formik, useFormik } from "formik";
+import { useDispatch } from 'react-redux';
+import { LoginUser } from "../../Redux/Action/auth.action";
 
 function Login(props) {
   const [userType, setUserType] = useState("Login");
+  const disaptch = useDispatch();
   // const [Reset, setReset] = useState(false)
 
   let login = {
@@ -64,7 +67,7 @@ function Login(props) {
       if (userType === "Login") {
         // console.log("Successfully Login");
         sessionStorage.setItem("user", "1");
-        dispatch(LoginUser(v));
+        disaptch(LoginUser(values));
       } else if (userType === "Signup") {
         console.log("Successfully Login");
       } else if (userType === "forgotPassword") {

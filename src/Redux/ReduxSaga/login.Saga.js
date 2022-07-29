@@ -1,7 +1,8 @@
-import { call, put, takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery, all } from 'redux-saga/effects'
+import { LoginApi } from '../../common/api/login.api';
 import * as ActionType from '../ActionType'
 
-function* fetchUser(action) {
+function* loginsaga(action) {
     try {
        const user = yield call(LoginApi(), action.payload);
        yield put({type: ActionType.EMAIL_VERIFY, user: user});
@@ -10,8 +11,10 @@ function* fetchUser(action) {
     }
 }
  
-function* mySaga() {
-    yield takeEvery("USER_FETCH_REQUESTED", fetchUser);
+function* watchsage() {
+    yield takeEvery(ActionType.LOGIN_USER, loginsaga);
 }
 
- export default mySaga;
+ export function* loginsagaCall () {
+    yield all ([watchsage])
+ }
