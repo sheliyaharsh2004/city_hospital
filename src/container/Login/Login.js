@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { Form, Formik, useFormik } from "formik";
 import { useDispatch } from 'react-redux';
 import { LoginUser } from "../../Redux/Action/auth.action";
+import { Link } from "@mui/material";
 
 function Login(props) {
   const [userType, setUserType] = useState("Login");
@@ -187,16 +188,16 @@ function Login(props) {
                     </button>
                   </div>
                   <div className="text-center">
-                    <button
-                      className="appointment-btn border-0 ms-0 mt-3"
-                      type="button"
+                    <Link
+                      className="border-0 ms-0 mt-5"
+                      // type="button"
                       onClick={() => setUserType("forgotPassword")}
                     >
                       Forgot Password
-                    </button>
+                    </Link>
                   </div>
                   <div className="text-center pt-2">
-                    <p>Create a new account </p>
+                    {/* <p>Create a new account </p> */}
                     <button
                       className="appointment-btn border-0 m-0"
                       type="button"
