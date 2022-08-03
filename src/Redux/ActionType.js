@@ -3,3 +3,5 @@ export const DECREMENT_COUNTER = 'DECREMENT_COUNTER'
 
 export const LOGIN_USER = 'LOGIN_USER'
 export const EMAIL_VERIFY = 'EMAIL_VERIFY'
+
+export const SET_ALERT = 'SET_ALERT'
