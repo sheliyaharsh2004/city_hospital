@@ -12,13 +12,14 @@ export const AlertReducer  = (state=initalstate , action) => {
         case ActionType.SET_ALERT :
             return {
                 ...state,
-                text ,
-                color
+                text: action.payload.text ,
+                color: action.payload.color
             }
-        case ActionType.DECREMENT_COUNTER :
+        case ActionType.RESET_ALERT :
             return {
                 ...state,
-                counter : state.counter -1
+                text: '',
+                color: ''
             }   
         default : 
             return state;     
