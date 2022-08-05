@@ -1,4 +1,3 @@
-import { color } from '@mui/system'
 import * as ActionType from '../ActionType'
 
 const initalstate = {

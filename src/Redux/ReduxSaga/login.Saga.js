@@ -6,7 +6,7 @@ import * as ActionType from '../ActionType'
 function* loginsaga(action) {
    try {
      const user = yield call(LoginApi, action.payload);
-      yield put(setAlert({text:user.payload, color:"Succe"}));
+      yield put(setAlert({text:user.payload, color:"success"}));
       yield put({type: ActionType.EMAIL_VERIFY, user: user});
    } catch (e) {
       yield put(setAlert({text:e.payload, color:"error"}))
