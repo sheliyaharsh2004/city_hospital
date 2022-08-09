@@ -1,8 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import Alert from '../Alert/Alert';
 
 function Header(props) {
+
+    const authUser = useSelector(state => state.auth)
+
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
