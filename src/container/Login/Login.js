@@ -3,7 +3,7 @@ import { Button, FormGroup, Input, Label } from "reactstrap";
 import * as yup from "yup";
 import { Form, Formik, useFormik } from "formik";
 import { useDispatch } from 'react-redux';
-import { LoginUser } from "../../Redux/Action/auth.action";
+import { LoginUser, SignupUser } from "../../Redux/Action/auth.action";
 import { Link } from "@mui/material";
 
 function Login(props) {
@@ -22,9 +22,9 @@ function Login(props) {
   };
 
   let Signup = {
-    name: yup
-      .string()
-      .required("Please enter your name"),
+    // name: yup
+    //   .string()
+    //   .required("Please enter your name"),
     email: yup
       .string()
       .email("Please enter valid email")
@@ -49,7 +49,7 @@ function Login(props) {
   } else if (userType === "Signup") {
     schema = yup.object().shape(Signup);
     initialVal = {
-      name: "",
+      // name: "",
       email: "",
       password: "",
     };
@@ -70,7 +70,8 @@ function Login(props) {
         sessionStorage.setItem("user", "1");
         disaptch(LoginUser(values));
       } else if (userType === "Signup") {
-        console.log("Successfully Login");
+        // console.log("Successfully Login");
+        disaptch(SignupUser(values));
       } else if (userType === "forgotPassword") {
         console.log("Successfully otp");
       }
@@ -106,7 +107,7 @@ function Login(props) {
                     }
                   </div>
                 ) : null}
-                {userType === "Signup" ? (
+                {/* {userType === "Signup" ? (
                   <div className="col-md-4 form-group">
                     <input
                       type="text"
@@ -120,7 +121,7 @@ function Login(props) {
                       formik.errors.name ? <p className='error'>{formik.errors.name}</p> : null
                     }
                   </div>
-                ) : null}
+                ) : null} */}
                 {userType === "Login" || userType === "Signup" ? (
                   <>
                     <div className="col-md-4 form-group mt-3 mt-md-0">

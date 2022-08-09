@@ -12,13 +12,11 @@ import PrivateRoute from "./Route/PrivateRoute";
 import BookAppointment from "./container/Appointment/BookAppointment";
 import ListAppointment from "./container/Appointment/ListAppointment";
 import { Provider } from "react-redux";
-import { counterStore } from "./Redux/Store";
 import Counter from "./container/Counter/Counter";
 import { SnackbarProvider } from 'notistack';
+import store from './Redux/Store';
 
 function App() {
-
-  let store = counterStore()
 
   return (
     <>
