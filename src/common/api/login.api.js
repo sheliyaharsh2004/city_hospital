@@ -43,7 +43,7 @@ export const SignupApi = (data) => {
     .then((emailVerified) => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          if(user.emailVerified) {
+          if(user.user.emailVerified) {
             resolve({payload : "Email Successfully!"});
           } else {
             resolve({payload : "plese verify your Email"});

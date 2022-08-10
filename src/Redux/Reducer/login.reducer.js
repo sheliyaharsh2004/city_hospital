@@ -8,7 +8,7 @@ const initialState ={
 
 export const LoginReducer = (state = initialState, action) => {
     switch(action.type){
-        case ActionType.EMAIL_VERIFY :
+        case ActionType.LOGINUP_USER :
             return {
                 ...state,
                 isLoading: false,

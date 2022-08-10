@@ -6,6 +6,7 @@ import Alert from '../Alert/Alert';
 function Header(props) {
 
     const authUser = useSelector(state => state.auth)
+    console.log(authUser)
 
     return (
         <div className="main-header">
@@ -58,7 +59,7 @@ function Header(props) {
                         <span className="d-none d-md-inline">Make Appointment</span>
                     </NavLink>
                     <NavLink to={"/login"} className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">Login/ Signup</span>
+                        <span className="d-none d-md-inline">{authUser.user === null ? "Login/ Signup" : "Logout" }</span>
                     </NavLink>
                     <Alert/>
                 </div>
