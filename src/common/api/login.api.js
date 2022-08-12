@@ -1,11 +1,10 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "../../Firebase";
 
 export const LoginApi = (data) => {
   return new Promise((resolve, reject) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
     .then((user) => {
-      console.log(user);
       if(user.user.emailVerified){
         resolve({payload: user.user})
       } else{
@@ -24,13 +23,10 @@ export const LoginApi = (data) => {
 }
 
 export const SignupApi = (data) => {
-  console.log(data);
   return new Promise((resolve, reject) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(user);
-
       onAuthStateChanged(auth, (user) => {
         if (user) {
           sendEmailVerification(user);
@@ -64,4 +60,16 @@ export const SignupApi = (data) => {
       }
     });
   });
+}
+
+export const LoguotApi = () => {
+  return new Promise((resolve, reject) => {
+    signOut(auth)
+      .then((user) => {
+        resolve({payload: "Logout Successfully"})
+      })
+      .catch((e) => {
+        reject({payload: "Something Went Wrong"})
+      })
+  })
 }

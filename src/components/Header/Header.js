@@ -1,12 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch} from 'react-redux'
 import { NavLink } from 'react-router-dom';
+import { LoguotUser } from '../../Redux/Action/auth.action';
 import Alert from '../Alert/Alert';
 
 function Header(props) {
 
     const authUser = useSelector(state => state.auth)
-    console.log(authUser)
+
+    const dispatch = useDispatch();
+
+    const handleLoguot = () => {
+        dispatch(LoguotUser())
+    }
 
     return (
         <div className="main-header">
@@ -58,9 +64,16 @@ function Header(props) {
                     <NavLink to={"/bookappointment"} className="appointment-btn scrollto">
                         <span className="d-none d-md-inline">Make Appointment</span>
                     </NavLink>
-                    <NavLink to={"/login"} className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">{authUser.user === null ? "Login/ Signup" : "Logout" }</span>
-                    </NavLink>
+
+                    {authUser.user === null ? 
+                        <NavLink to={"/login"} className="appointment-btn scrollto">
+                            <span className="d-none d-md-inline">{ "Login/ Signup"}</span>
+                        </NavLink>   
+                    :
+                        <NavLink to={"/login"} onClick={() => handleLoguot()} className="appointment-btn scrollto">
+                            <span className="d-none d-md-inline">{ "Logout" }</span>
+                        </NavLink>
+                    }
                     <Alert/>
                 </div>
             </header>

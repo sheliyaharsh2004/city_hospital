@@ -12,6 +12,14 @@ export const LoginupUser = (data) => (disaptch) => {
     disaptch({type : ActionType.LOGINUP_USER, payload : data})
 }
 
+export const LoguotUser = () => (disaptch) => {
+    disaptch({type : ActionType.LOGUOT_USER})
+}
+
+export const LoggedoutUser = () => (disaptch) => {
+    disaptch({type : ActionType.LOGGEDOUT_USER})
+}
+
 export const EmailVerify = (user) => (disaptch) => {
     disaptch({type : ActionType.EMAIL_VERIFY, payload : user})
 }
