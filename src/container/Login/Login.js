@@ -181,31 +181,19 @@ function Login(props) {
               ) : userType === "Login" ? (
                 <>
                   <div className="text-center">
-                    <button
-                      className="appointment-btn border-0 m-0"
-                      type="submit"
-                    >
+                    <button className="appointment-btn scrollto border-0 m-2" type="submit">
                       Login
                     </button>
-                  </div>
-                  <div className="text-center">
-                    <Link
-                      className="border-0 ms-0 mt-5"
-                      // type="button"
-                      onClick={() => setUserType("forgotPassword")}
-                    >
-                      Forgot Password
-                    </Link>
-                  </div>
-                  <div className="text-center pt-2">
-                    {/* <p>Create a new account </p> */}
-                    <button
-                      className="appointment-btn border-0 m-0"
-                      type="button"
-                      onClick={() => setUserType("Signup")}
-                    >
+                    <button className="appointment-btn scrollto border-0 m-2" type="submit" onClick={() => setUserType("Signup")}>
+                      {/* <p>Create new account <Link> Sign Up</Link></p> */}
                       Sign Up
                     </button>
+                  </div>
+                  {/* <p className="text-center mt-1">OR</p> */}
+                  <div className="text-center m-0">
+                    <Link className="border-0 mt-2" onClick={() => setUserType("forgotPassword")}>
+                      Forgot Password
+                    </Link>
                   </div>
                 </>
               ) : (
@@ -230,6 +218,14 @@ function Login(props) {
                   </div>
                 </>
               )}
+              {
+                userType === 'forgetPassowrd' ? " ":
+                <div className="text-center mt-3">
+                  <button className="appointment scrollto border-0 " type="submit" onClick={() => googlelogin()}>
+                    <i className="bi bi-google m-1"/> Google Login
+                  </button>
+                </div>
+              }
             </Form>
           </Formik>
         </div>

@@ -7,6 +7,7 @@ export const SIGNUP_USER = 'SIGNUP_USER'
 export const EMAIL_VERIFY = 'EMAIL_VERIFY'
 export const LOGUOT_USER = 'LOGUOT_USER'
 export const LOGGEDOUT_USER = 'LOGGEDOUT_USER'
+export const GOOGLE_LOGIN = 'GOOGLE_LOGIN'
 
 export const SET_ALERT = 'SET_ALERT'
 export const RESET_ALERT = 'RESET_ALERT'
